@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width-device-width, initial-scale-1.0">
+       <title>Titanic Survival Prediction</title>
+    </head>
+    <body>
+       <h2>Titanic Survival Prediction</h2>
+       <form id="predictionForm" method="post" action="/predict">
+       <label for="pclass">Pclass:</label>
+       <input type="text" id="pclass" name="pclass"><br><br>
+
+       <label for="sex">sex (0 for male, 1 for female): </label>
+       <input type="text" id="sex" name="sex"><br><br>
+
+       <label for="age">Age:</label>
+       <input type="text" id="age" name="age"><br><br>
+
+       <label for stbsp">Stbsp:</label>
+       <input type="text" id="sibsp" name="sibsp"><br><br>
+
+       <label for="parch">Parch:</label>
+       <input type="text" id="parch" name="parch"><br><br>
+
+       <label for "fare">are:</label>
+       <input type-"text" id-"fary" name="fare"><br><br>
+
+       <label for "embarked">Embarked (0 for S, 1 for C, 2 for Q):</label> <input type="text" id="embarked" name-"embarked"><br><br>
+
+       <button type="button" onclick="predictSurvival()">Predict</button> </form>   
+       
+       <p id="predictionResult"></p>
+
+       <script>
+        function predictionSurvival(){
+            var xhr= new XMLHttpRequest();
+            var url= "/predict"
+            var data= new FormData(document.getElementById("predictionForm"))
+
+            xhr.open("POST",url,true)
+            xhr.onreadystatechange= function(){
+                if(xhr.readyState===4 && xhr.status===200){
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("predictionResult").innerHTML="Survival Prediction"+ response.prediction;
+
+                }
+            };
+            xhr.send(data);
+        }
+       </script>
+    </body>
+</html>
+
+
+
+
+
